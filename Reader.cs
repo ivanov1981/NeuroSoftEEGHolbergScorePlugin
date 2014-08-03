@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ExternalEegInterface.DataModel;
 
 namespace NeuroSoftEEGHolbergScorePlugin
 {
@@ -168,9 +169,9 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// </summary>
         /// <param name="viewCount"></param>
         /// <param name="positionDateTime"></param>
-        public void GotoDateTime(int viewCount, DateTime positionDateTime)
+        public void GotoEvent(int viewCount, Event eventToGoTo)
         {
-            helper.GotoDateTime(viewCount, positionDateTime);
+            helper.GotoDateTime(viewCount, eventToGoTo.Start);
         }       
 
         /// <summary>
@@ -188,6 +189,17 @@ namespace NeuroSoftEEGHolbergScorePlugin
         public void Shutdown()
         {
             helper.Shutdown();
-        }        
+        }
+
+
+        public double GetReaderSensorOverlayBottomSpacingFactor()
+        {
+            return Constants.READERSENSOROVERLAYBOTTOMSPACINGFACTOR;
+        }
+
+        public double GetReaderSensorOverlayTopSpacingFactor()
+        {
+            return Constants.READERSENSOROVERLAYTOPSPACINGFACTOR;
+        }
     }
 }

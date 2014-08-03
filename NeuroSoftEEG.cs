@@ -24,7 +24,7 @@ namespace NeuroSoftEEGHolbergScorePlugin
             return new Mapper();
         }
 
-        public IExternalReader GetReader(ExternalEegInterface.DataModel.Database database)
+        public IExternalReader GetReader(ExternalEegInterface.DataModel.Reader reader, ExternalEegInterface.DataModel.Database database)
         {
             return new Reader();
         }
