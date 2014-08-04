@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using ExternalEegInterface.DataModel;
+using NeuroSoftEEGHolbergScorePlugin.DataModels;
 
 namespace NeuroSoftEEGHolbergScorePlugin
 {
@@ -43,8 +45,8 @@ namespace NeuroSoftEEGHolbergScorePlugin
             return result;
         }
 
-        public List<StudyType> GetStudyTypes(Database database)
-        {
+        public List<StudyType> GetStudyTypes(ExternalEegInterface.DataModel.Database database)
+        {            
             var studyTypes = NeuroSoft.EEG.WPF.Holberg.HolbergScoreHelper.GetStudyTypes();
             var result = new List<StudyType>(from s in studyTypes select Converter.ToHolberg(s));
             return result;

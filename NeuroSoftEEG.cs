@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ExternalEegInterface;
+using ExternalEegInterface.Admin;
 using ExternalEegInterface.DataModel;
 
 namespace NeuroSoftEEGHolbergScorePlugin
 {
     public class NeuroSoftEEG : IExternalEegSystem
     {
+
+        public void OnPluginLoaded(ExternalEegInterface.DataModel.Reader reader)
+        {            
+            NeurosoftAssemblyLoader.LoadIfNotLoaded(reader);            
+        }
+
+        public void OnReaderChanged(ExternalEegInterface.DataModel.Reader reader)
+        {
+            NeurosoftAssemblyLoader.LoadIfNotLoaded(reader);
+        }
+
         public ExternalEegInterface.Admin.IAdminDatabaseEditor GetAdminDatabaseEditor(ExternalEegInterface.DataModel.Database database)
         {
-            return null;
+            return new NeuroSoftEEGHolbergScorePlugin.Presenters.AdminDatabaseEditPresenter(database);
         }
 
         public ExternalEegInterface.Admin.IAdminReaderEditor GetAdminReaderEditor(ExternalEegInterface.DataModel.Reader reader)
         {
-            return null;
+            return new NeuroSoftEEGHolbergScorePlugin.Presenters.AdminReaderEditPresenter(reader); ;
         }
 
         public ExternalEegInterface.Mapping.IMapper GetMapper()
