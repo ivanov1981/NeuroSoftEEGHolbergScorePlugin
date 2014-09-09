@@ -102,6 +102,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <CallTarget Targets="CopyPluginToHUI" />
+    <CallTarget Targets="CopyPluginToHUI" Condition=" '$(ImportedTargetUtils)' != '' " />
   </Target>
 </Project>
