@@ -177,10 +177,12 @@ namespace NeuroSoftEEGHolbergScorePlugin
                 StudyType = Converter.ToHolberg(externalStudy.StudyType),
                 StudyStart = externalStudy.StudyStart,
                 StudyLength = externalStudy.StudyLength,
+                StudyStop = externalStudy.StudyStart.Add(externalStudy.StudyLength),
                 Patient = parentPatient
             };
 
-            study.Recordings.Add(new Recording() { ExternalId = externalStudy.Id, Start = study.StudyStart, Study = study });
+            var recording = new Recording() { ExternalId = externalStudy.Id, Start = study.StudyStart, Stop = study.StudyStop, Study = study, FileName = "DUMMY" };            
+            study.Recordings.Add(recording);
             return study;
         }
 
@@ -188,18 +190,20 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Patient ToHolberg(NeuroSoft.EEG.WPF.Holberg.Patient exteranlPatient)
+        public static Patient ToHolberg(NeuroSoft.EEG.WPF.Holberg.Patient externalPatient)
         {
             var result = new Patient()
             {
-                ExternalId = exteranlPatient.Id,
-                DateOfBirth = exteranlPatient.DateOfBirth,
-                FirstName = exteranlPatient.FirstName,
-                LastName = exteranlPatient.LastName,
-                Gender = ToHolberg(exteranlPatient.Gender),                
+                ExternalId = externalPatient.Id,
+                DateOfBirth = externalPatient.DateOfBirth,
+                FirstName = externalPatient.FirstName,
+                LastName = externalPatient.LastName,
+                Gender = ToHolberg(externalPatient.Gender),      
+                MotherName = string.Empty,
+                IdentityString = externalPatient.IdentityString
             };
 
-            foreach (var study in exteranlPatient.Studies)
+            foreach (var study in externalPatient.Studies)
             {
                 result.Studies.Add(ToHolberg(study, result));
             }
