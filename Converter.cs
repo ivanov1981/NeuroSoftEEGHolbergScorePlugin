@@ -199,7 +199,7 @@ namespace NeuroSoftEEGHolbergScorePlugin
                 FirstName = externalPatient.FirstName,
                 LastName = externalPatient.LastName,
                 Gender = ToHolberg(externalPatient.Gender),      
-                MotherName = string.Empty,
+                MotherName = null,
                 IdentityString = externalPatient.IdentityString
             };
 

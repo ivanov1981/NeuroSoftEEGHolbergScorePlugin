@@ -30,7 +30,11 @@ namespace NeuroSoftEEGHolbergScorePlugin
 
         public ExternalEegInterface.DataModel.Study RefreshStudy(ExternalEegInterface.DataModel.Study study)
         {
-            return study;
+            var externalStudy = helper.GetStudyById(study.ExternalId);
+            var patient = Converter.ToHolberg(externalStudy.Patient);
+            var _study = Converter.ToHolberg(externalStudy);
+            _study.Patient = patient;            
+            return _study;
         }
     }
 }
