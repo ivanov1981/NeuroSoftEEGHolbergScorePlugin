@@ -36,7 +36,7 @@ Icon
 .Trashes
 
 #custom
-/bin/*
-/obj/*
 /obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.suo
+/NeuroSoftEEGHolbergScorePlugin/bin/*
+/NeuroSoftEEGHolbergScorePlugin/obj/*
