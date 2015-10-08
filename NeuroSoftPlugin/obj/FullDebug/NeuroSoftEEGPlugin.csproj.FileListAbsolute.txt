@@ -1,0 +1,17 @@
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\NeuroSoftPlugin.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\NeuroSoftPlugin.pdb
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\AssemblyVersion.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\ExternalEegInterface.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\NeuroSoft.EEG.WPF.exe
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\Telerik.Windows.Controls.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\Telerik.Windows.Controls.GridView.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\bin\Debug\Telerik.Windows.Data.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\NeuroSoftEEGPlugin.csprojResolveAssemblyReference.cache
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\Controls\AdminDatabaseEditControl.baml
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\Controls\AdminReaderEditControl.baml
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\Controls\AdminDatabaseEditControl.g.cs
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\Controls\AdminReaderEditControl.g.cs
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\NeuroSoftPlugin_MarkupCompile.cache
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\NeuroSoftPlugin.g.resources
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\NeuroSoftPlugin.dll
+C:\Users\Jan\Documents\GitHub\NeuroSoftEEGHolbergScorePlugin\NeuroSoftPlugin\obj\FullDebug\NeuroSoftPlugin.pdb
