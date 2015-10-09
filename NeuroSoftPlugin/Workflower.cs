@@ -25,7 +25,18 @@ namespace NeuroSoftEEGHolbergScorePlugin
             var patient = Converter.ToHolberg(externalStudy.Patient);
             var study = Converter.ToHolberg(externalStudy);
             study.Patient = patient;
+            CleanupObjectGraph(study);
             return study;
+        }
+
+        private static void CleanupObjectGraph(ExternalEegInterface.DataModel.Study study)
+        {            
+            study.Patient.Studies = null;
+            foreach (var recording in study.Recordings)
+            {
+                recording.Study = null;
+                recording.ExternalId2 = "";
+            }
         }
 
         public ExternalEegInterface.DataModel.Study RefreshStudy(ExternalEegInterface.DataModel.Study study)

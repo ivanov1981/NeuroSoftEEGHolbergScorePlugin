@@ -180,7 +180,7 @@ namespace NeuroSoftEEGHolbergScorePlugin
             };
 
             var studyStop = externalStudy.StudyStart.Add(externalStudy.StudyLength);
-            var recording = new Recording() { ExternalId = externalStudy.Id, Start = externalStudy.StudyStart, Stop = studyStop, Study = study, FileName = "DUMMY" };            
+            var recording = new Recording() { ExternalId = externalStudy.Id, Start = externalStudy.StudyStart, Stop = studyStop, Study = study, FileName = "DUMMY", ExternalId2 = ""};            
             study.Recordings.Add(recording);
             return study;
         }

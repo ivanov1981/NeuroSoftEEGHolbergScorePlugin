@@ -116,14 +116,6 @@ namespace NeuroSoftEEGHolbergScorePlugin
             return result;
         }    
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="recording"></param>
-        public void OpenRecording(ExternalEegInterface.DataModel.Recording recording)
-        {
-            helper.OpenRecording(recording.ExternalId);
-        }
 
         /// <summary>
         /// 
@@ -153,22 +145,12 @@ namespace NeuroSoftEEGHolbergScorePlugin
         public int NumberOfOpenEegs
         {
             get { throw new NotImplementedException(); }
-        }
-
-        bool ExternalEegInterface.IExternalReader.FindRecordingWindow(Recording recording)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public int? GetIndexOfEeg(Recording recording)
         {
             throw new NotImplementedException();
-        }
-
-        Recording ExternalEegInterface.IExternalReader.OpenRecording(Recording recording)
-        {
-            throw new NotImplementedException();
-        }
+        }      
 
         public List<Event> GetEvents(Recording recordingToActivate)
         {
@@ -213,6 +195,18 @@ namespace NeuroSoftEEGHolbergScorePlugin
         public List<Tuple<Sensor, Sensor>> GetTraces(Recording recordingToActivate)
         {
             throw new NotImplementedException();
+        }
+
+
+        bool ExternalEegInterface.IExternalReader.FindRecordingWindow(Recording recording)
+        {
+            throw new NotImplementedException();
+        }
+
+        Recording ExternalEegInterface.IExternalReader.OpenRecording(Recording recording)
+        {
+            helper.OpenRecording(recording.ExternalId);
+            return recording;
         }
     }
 }
