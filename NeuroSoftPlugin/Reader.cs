@@ -9,21 +9,7 @@ namespace NeuroSoftEEGHolbergScorePlugin
     public class Reader : ExternalEegInterface.IExternalReader
     {
         private NeuroSoft.EEG.WPF.Holberg.HolbergScoreHelper helper = new NeuroSoft.EEG.WPF.Holberg.HolbergScoreHelper();
-        /// <summary>
-        /// 
-        /// </summary>
-        public int ViewCount
-        {
-            get { return helper.ViewCount; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int ActiveView
-        {
-            get { return helper.ActiveView; }
-        }
+               
 
         public bool IsInstalled
         {
@@ -53,9 +39,13 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// </summary>
         /// <param name="viewCount"></param>
         /// <returns></returns>
-        public ExternalEegInterface.DataModel.Montage GetDisplayedMontage(int viewCount)
+        public ExternalEegInterface.DataModel.Montage GetDisplayedMontage(Recording recording)
         {
-            return Converter.ToHolberg(helper.GetDisplayedMontage(viewCount));
+            Montage result = null;
+            var viewCount = GetIndexOfEeg(recording);
+            if (viewCount.HasValue)
+                result = Converter.ToHolberg(helper.GetDisplayedMontage(viewCount.Value));
+            return result;
         }
 
         /// <summary>
@@ -85,9 +75,15 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// <param name="s"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        public ExternalEegInterface.Location.Window GetMontagePortionWindow(int viewCount, ExternalEegInterface.DataModel.Patient p, ExternalEegInterface.DataModel.Study s, ExternalEegInterface.DataModel.Recording r)
+        public ExternalEegInterface.Location.Window GetMontagePortionWindow(Recording recording)
         {
-            return Converter.ToHolberg(helper.GetMontagePortionWindow(viewCount));
+            ExternalEegInterface.Location.Window result = null;
+            var viewCount = FindRecordingWindow(recording);
+            if (viewCount.HasValue)
+            {
+                result = Converter.ToHolberg(helper.GetMontagePortionWindow(viewCount.Value));
+            }
+            return result;
         }
 
         /// <summary>
@@ -105,13 +101,18 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// </summary>
         /// <param name="viewCount"></param>
         /// <returns></returns>
-        public List<Tuple<ExternalEegInterface.DataModel.Sensor, ExternalEegInterface.DataModel.Sensor>> GetTraces(int viewCount)
+        public List<Tuple<ExternalEegInterface.DataModel.Sensor, ExternalEegInterface.DataModel.Sensor>> GetTraces(Recording recording)
         {
-            var traces = helper.GetTraces(viewCount);
             var result = new List<Tuple<ExternalEegInterface.DataModel.Sensor, ExternalEegInterface.DataModel.Sensor>>();
-            foreach (var trace in traces)
+            var viewCount = GetIndexOfEeg(recording);
+            if (viewCount.HasValue)
             {
-                result.Add(new Tuple<ExternalEegInterface.DataModel.Sensor, ExternalEegInterface.DataModel.Sensor>(Converter.ToHolberg(trace.Item1), Converter.ToHolberg(trace.Item2)));
+                var traces = helper.GetTraces(viewCount.Value);                
+                foreach (var trace in traces)
+                {
+                    result.Add(new Tuple<ExternalEegInterface.DataModel.Sensor, ExternalEegInterface.DataModel.Sensor>(
+                            Converter.ToHolberg(trace.Item1), Converter.ToHolberg(trace.Item2)));
+                }
             }
             return result;
         }    
@@ -139,68 +140,54 @@ namespace NeuroSoftEEGHolbergScorePlugin
 
         public int IndexOfActiveEeg
         {
-            get { throw new NotImplementedException(); }
+            get { return helper.ActiveView; }
         }
 
         public int NumberOfOpenEegs
         {
-            get { throw new NotImplementedException(); }
+            get { return helper.ViewCount; }
         }        
 
         public int? GetIndexOfEeg(Recording recording)
         {
-            throw new NotImplementedException();
+            return FindRecordingWindow(recording);
         }      
 
         public List<Event> GetEvents(Recording recordingToActivate)
         {
-            throw new NotImplementedException();
-            /*
-            var events = helper.GetEvents(viewCount);
-            var result = new List<ExternalEegInterface.DataModel.Event>();
-            foreach (var _event in events)
+            var result = new List<Event>();
+            var viewCount = FindRecordingWindow(recordingToActivate);
+            if (viewCount != null)
             {
-                result.Add(Converter.ToHolberg(_event));
+                var events = helper.GetEvents(viewCount.Value);
+                result = events.Select(_event => Converter.ToHolberg(_event)).ToList();
             }
             return result;
-             */
+             
         }
 
         public void GotoEvent(Recording recording, Event eventToGoTo)
         {
-            throw new NotImplementedException();
-            //helper.GotoDateTime(viewCount, eventToGoTo.Start);
+            var viewCount = FindRecordingWindow(recording);
+            if (viewCount != null)
+            {
+                helper.GotoDateTime(viewCount.Value, eventToGoTo.Start);
+            }
         }
 
         public ExternalEegInterface.Location.Window GetEegChildWindow(Recording r)
         {
             throw new NotImplementedException();
         }
-
-        public ExternalEegInterface.Location.Window GetMontagePortionWindow(Recording recording)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void ActivateWindow(Recording recordingToActivate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Montage GetDisplayedMontage(Recording recordingToActivate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Tuple<Sensor, Sensor>> GetTraces(Recording recordingToActivate)
-        {
-            throw new NotImplementedException();
-        }
+        {            
+        }        
 
 
         bool ExternalEegInterface.IExternalReader.FindRecordingWindow(Recording recording)
         {
-            throw new NotImplementedException();
+            return FindRecordingWindow(recording).Value != null;
         }
 
         Recording ExternalEegInterface.IExternalReader.OpenRecording(Recording recording)
