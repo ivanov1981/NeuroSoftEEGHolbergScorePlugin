@@ -39,9 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLLs\ExternalEegInterface.dll</HintPath>
     </Reference>
-    <Reference Include="NeuroSoft.EEG.WPF">
-      <HintPath>DLLs\NeuroSoft.EEG.WPF.exe</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -84,7 +81,12 @@
     <Compile Include="Reader.cs" />
     <Compile Include="Workflower.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\NeuroSoft.EEG.WPF.csproj">
+      <Project>{46ed7d79-66e3-477f-b9ba-a224200127f7}</Project>
+      <Name>NeuroSoft.EEG.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AdminDatabaseEditControl.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ExternalEegInterface.DataModel;
+using System.Runtime.InteropServices;
 
 namespace NeuroSoftEEGHolbergScorePlugin
 {
@@ -64,7 +65,8 @@ namespace NeuroSoftEEGHolbergScorePlugin
         /// <returns></returns>
         public ExternalEegInterface.Location.Window GetMainWindow()
         {
-            return Converter.ToHolberg(helper.GetMainWindow());
+            var window = Converter.ToHolberg(helper.GetMainWindow());            
+            return window;
         }
 
         /// <summary>
@@ -177,17 +179,29 @@ namespace NeuroSoftEEGHolbergScorePlugin
 
         public ExternalEegInterface.Location.Window GetEegChildWindow(Recording r)
         {
-            throw new NotImplementedException();
+            return GetMainWindow();                        
         }
-        
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
         public void ActivateWindow(Recording recordingToActivate)
-        {            
+        {
+            var window = GetMainWindow();
+            if (window != null)
+            {
+                ShowWindow(window.WindowHandle, 1);
+                SetForegroundWindow(window.WindowHandle);
+            }
         }        
 
 
         bool ExternalEegInterface.IExternalReader.FindRecordingWindow(Recording recording)
         {
-            return FindRecordingWindow(recording).Value != null;
+            return FindRecordingWindow(recording) != null;
         }
 
         Recording ExternalEegInterface.IExternalReader.OpenRecording(Recording recording)
@@ -195,5 +209,5 @@ namespace NeuroSoftEEGHolbergScorePlugin
             helper.OpenRecording(recording.ExternalId);
             return recording;
         }
-    }
+    }   
 }

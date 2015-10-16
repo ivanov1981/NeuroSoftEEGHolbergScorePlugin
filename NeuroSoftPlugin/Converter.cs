@@ -220,7 +220,10 @@ namespace NeuroSoftEEGHolbergScorePlugin
                 return null;
             ExternalEegInterface.Location.Window converted = new ExternalEegInterface.Location.Window()
             {
+                Caption = window.Caption,
+                WindowHandle = window.WindowHandle,
                 Height = window.Height,
+                Width = window.Width,
                 IsForeground = window.IsForeground,
                 Visible = window.Visible,
                 X = window.X,
