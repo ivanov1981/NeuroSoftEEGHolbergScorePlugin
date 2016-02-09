@@ -37,6 +37,6 @@ Icon
 #custom
 /obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.suo
-/NeuroSoftEEGHolbergScorePlugin/bin/*
-/NeuroSoftEEGHolbergScorePlugin/obj/*
+/NeuroSoftPlugin/bin/**
+/NeuroSoftPlugin/obj/**
 /HUI/**
